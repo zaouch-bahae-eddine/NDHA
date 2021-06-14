@@ -4,13 +4,18 @@
 #include <iostream>
 using namespace std;
 
-void displayBlaock(int*** A, int N){
+void displayBlaock(int*** A, int N, int* elements){
     int i = 0, j = 0;
     while(*(A+i) != nullptr){
         cout << "\nnew Block" << endl;
         while(*(*(A+i)+j) != nullptr){
             for(int z = 0; z < N; z++){
-                cout << A[i][j][z] << "-";
+                if(elements != nullptr){
+                    cout << elements[z] << " = " << A[i][j][z] << " | ";
+                } else {
+                    
+                    cout << z << " = " << A[i][j][z] << " | ";
+                }
             }
             j++;
             cout << endl;
@@ -181,13 +186,14 @@ int* copyArray(int* s, int N){
 }
 int* oldOrder(int* s, int* refs, int N){
     int change;
+    int* refss = copyArray(refs, N);
     int* ss = copyArray(s, N);
     for(int i = 0; i < N - 1; i++){
         for(int j = i + 1; j < N; j++){
-            if(refs[j] < refs[i]){
-                change = refs[i];
-                refs[i] = refs[j];
-                refs[j] = change;
+            if(refss[j] < refss[i]){
+                change = refss[i];
+                refss[i] = refss[j];
+                refss[j] = change;
                 change = ss[i];
                 ss[i] = ss[j];
                 ss[j] = change;
