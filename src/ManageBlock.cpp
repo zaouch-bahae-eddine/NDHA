@@ -7,7 +7,7 @@ using namespace std;
 void displayBlaock(int*** A, int N){
     int i = 0, j = 0;
     while(*(A+i) != nullptr){
-        cout << "new Block" << endl;
+        cout << "\nnew Block" << endl;
         while(*(*(A+i)+j) != nullptr){
             for(int z = 0; z < N; z++){
                 cout << A[i][j][z] << "-";
@@ -21,16 +21,30 @@ void displayBlaock(int*** A, int N){
     }
 }
 
-int*** addNewBlock(int***A, int* sizeI, int* sizeJ, int* sizeZ){
+int*** addNewBlock(int***A, int* sizeI, int**sizeJ, int* sizeZ){
+    cout << "--addNewBlock--" << endl;
     //declaration variables
     int i,j;
 
     //Incrimenter sizeI
     (*sizeI)++;
-    cout << "siazI = " << *sizeI << endl;;
-    //Initialiser sizeJ à 2 puisque c'est un nouveux block
-    (*sizeJ) = 2;
+    cout << "siazI = " << *sizeI;
+    //Initialiser sizeJ ï¿½ 2 puisque c'est un nouveux block
+    int* sizeJReplace = (int*) malloc(sizeof(int) * (*sizeI - 1));
+    
+    for(i = 0; i < *sizeI - 1; i++){
+        if((i == *sizeI - 2) || (*(*sizeJ + i) == 1)){
+            sizeJReplace[i] = 2;
+            cout << "\nsizeReplace-" << i << "- = " << sizeJReplace[i] << endl;
+        } else {
+            sizeJReplace[i] = *(*sizeJ + i);
+            cout << "\nsizeReplace-" << i << "- = " << sizeJReplace[i] << endl;
+        }
+    }
 
+    //free(*sizeJ);
+    *sizeJ = sizeJReplace;
+    
     //Creation d'un nouveau B1[i][j] avec les nouveaux sizes
     int*** Alfa = (int***) malloc((*sizeI) * sizeof(int**));
 
@@ -38,13 +52,13 @@ int*** addNewBlock(int***A, int* sizeI, int* sizeJ, int* sizeZ){
         if(i == ((*sizeI) - 1)){
             *(Alfa + i) = nullptr;
         } else {
-            *(Alfa + i) = (int**) malloc((*sizeJ) * sizeof(int*));
+            *(Alfa + i) = (int**) malloc(*(*sizeJ + i) * sizeof(int*));
         }
     }
 
     for(i = 0; i < (*sizeI - 1) ; i++){
-        for(j = 0; j < *sizeJ; j++){
-            if(j == ((*sizeJ) - 1)){
+        for(j = 0; j < *(*sizeJ + i); j++){
+            if(j == (*(*sizeJ + i) - 1)){
                 *(*(Alfa+i)+j) = nullptr;
             }else {
                 *(*(Alfa+i)+j) = (int*) malloc((*sizeZ) * sizeof(int));
@@ -52,7 +66,7 @@ int*** addNewBlock(int***A, int* sizeI, int* sizeJ, int* sizeZ){
         }
     }
 
-    //Remplisage du nouveau B1 par les valeurs anciennes Sauf le nouveau block ajouté
+    //Remplisage du nouveau B1 par les valeurs anciennes Sauf le nouveau block ajoutï¿½
 
     i = 0;
     j = 0;
@@ -71,7 +85,7 @@ int*** addNewBlock(int***A, int* sizeI, int* sizeJ, int* sizeZ){
         i++;
     }
     if(*sizeI > 2){ // si le B1 contient des block
-        //Liberation de mémoire du ancien B1
+        //Liberation de mï¿½moire du ancien B1
        i = 0;
        j = 0;
         while(A[i] != nullptr){
@@ -85,25 +99,33 @@ int*** addNewBlock(int***A, int* sizeI, int* sizeJ, int* sizeZ){
         }
         free(A);
     }
+    *(*sizeJ + *sizeI -2 ) = 1;
+    cout << "kk:" << *(*sizeJ + *sizeI -2 ) << endl;
     return Alfa;
 }
 
-void addToBlock(int*** A, int* nvSolution, int* sizeI, int* sizeJ, int* sizeZ){
+void addToBlock(int*** A, int* nvSolution, int* sizeI, int** sizeJ, int* sizeZ){
+    cout << "--addToBlock--" << endl;
     int i, j;
-    if(*sizeJ == 2){
+        //incrementer sizeJ
+    (*(*sizeJ + *sizeI - 2))++;
+    cout << "mm:" << (*sizeJ)[0] ;
+    if((*sizeJ)[*sizeI - 2] == 2){
         for(i = 0; i < *sizeZ; i++){
             *(**(A + *sizeI - 2)+i) = nvSolution[i];
         }
-        (*sizeJ)++;
+        
+            cout << "\nBmm:" << (*(*sizeJ + *sizeI - 2)) ;
+        //(*(*sizeJ + *sizeI - 2))++;
+            cout << "\nBBmm:" << (*sizeJ)[*sizeI - 2] ;
         return;
     }
-    (*sizeJ)++;
     //Creation d'une nv B1[][] plus large pour la nv solution(nvSolution)
-    int** Beta = (int**) malloc((*sizeJ) * sizeof(int*));
-    for(i = 0; i < *sizeJ; i++){
-        if(i == *sizeJ - 1){
+    int** Beta = (int**) malloc((*(*sizeJ + *sizeI - 2)) * sizeof(int*));
+    for(i = 0; i < (*(*sizeJ + *sizeI - 2)); i++){
+        if(i == (*(*sizeJ + *sizeI - 2)) - 1){
             *(Beta + i) = nullptr;
-        } else if(i != *sizeJ - 2){
+        } else {
             *(Beta + i) = (int*) malloc((*sizeZ) * sizeof(int));
         }
     }
@@ -117,10 +139,11 @@ void addToBlock(int*** A, int* nvSolution, int* sizeI, int* sizeJ, int* sizeZ){
         free(*(*(A + *sizeI - 2)+j));
         j++;
     }
+
+
     //liberer A[i]
     free(*(A + *sizeI - 2));
     *(Beta + j) = nvSolution;
-    *(Beta + j + 1) = nullptr;
     *(A + *sizeI - 2) = Beta;
 }
 /*

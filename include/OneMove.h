@@ -1,6 +1,6 @@
 #ifndef ONEMOVE_H_INCLUDED
 #define ONEMOVE_H_INCLUDED
 
+int*** OneMove(int N, int m, int*** B, int* solutionInitial, int* L, int* U);
 
-//float** OneMove(int N, int m );
 #endif // ONEMOVE_H_INCLUDED

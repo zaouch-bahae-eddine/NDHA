@@ -9,19 +9,21 @@
 
 1623317200 c:\m1\stage\ndha\include\swap.h
 
-1623512795 source:c:\m1\stage\ndha\src\onemove.cpp
+1623626226 source:c:\m1\stage\ndha\src\onemove.cpp
 	<OneMove.h>
 	<ManageBlock.h>
 	<stdlib.h>
+	<iostream>
 
-1623352297 c:\m1\stage\ndha\include\onemove.h
+1623521246 c:\m1\stage\ndha\include\onemove.h
 
-1623519760 source:c:\m1\stage\ndha\main.cpp
+1623626080 source:c:\m1\stage\ndha\main.cpp
 	<iostream>
 	<ManageBlock.h>
 	<stdio.h>
+	<OneMove.h>
 
-1623511661 c:\m1\stage\ndha\include\manageblock.h
+1623576131 c:\m1\stage\ndha\include\manageblock.h
 
 1623352614 source:c:\m1\stage\ndha\src\f1.cpp
 	"F1.h"
@@ -30,7 +32,7 @@
 
 1623265385 c:\m1\stage\ndha\include\f1.h
 
-1623518570 source:c:\m1\stage\ndha\src\manageblock.cpp
+1623626547 source:c:\m1\stage\ndha\src\manageblock.cpp
 	<ManageBlock.h>
 	<stdio.h>
 	<stdlib.h>
