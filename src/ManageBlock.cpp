@@ -11,10 +11,10 @@ void displayBlaock(int*** A, int N, int* elements){
         while(*(*(A+i)+j) != nullptr){
             for(int z = 0; z < N; z++){
                 if(elements != nullptr){
-                    cout << elements[z] << " = " << A[i][j][z] << " | ";
+                    cout <<  elements[z] << " = " << A[i][j][z] << " | ";
                 } else {
                     
-                    cout << z << " = " << A[i][j][z] << " | ";
+                    cout << "x[" << z << "] = " << A[i][j][z] << " | ";
                 }
             }
             j++;
@@ -27,23 +27,19 @@ void displayBlaock(int*** A, int N, int* elements){
 }
 
 int*** addNewBlock(int***A, int* sizeI, int**sizeJ, int* sizeZ){
-    cout << "--addNewBlock--" << endl;
     //declaration variables
     int i,j;
 
     //Incrimenter sizeI
     (*sizeI)++;
-    cout << "siazI = " << *sizeI;
     //Initialiser sizeJ � 2 puisque c'est un nouveux block
     int* sizeJReplace = (int*) malloc(sizeof(int) * (*sizeI - 1));
     
     for(i = 0; i < *sizeI - 1; i++){
         if((i == *sizeI - 2) || (*(*sizeJ + i) == 1)){
             sizeJReplace[i] = 2;
-            cout << "\nsizeReplace-" << i << "- = " << sizeJReplace[i] << endl;
         } else {
             sizeJReplace[i] = *(*sizeJ + i);
-            cout << "\nsizeReplace-" << i << "- = " << sizeJReplace[i] << endl;
         }
     }
 
@@ -105,24 +101,17 @@ int*** addNewBlock(int***A, int* sizeI, int**sizeJ, int* sizeZ){
         free(A);
     }
     *(*sizeJ + *sizeI -2 ) = 1;
-    cout << "kk:" << *(*sizeJ + *sizeI -2 ) << endl;
     return Alfa;
 }
 
 void addToBlock(int*** A, int* nvSolution, int* sizeI, int** sizeJ, int* sizeZ){
-    cout << "--addToBlock--" << endl;
     int i, j;
         //incrementer sizeJ
     (*(*sizeJ + *sizeI - 2))++;
-    cout << "mm:" << (*sizeJ)[0] ;
     if((*sizeJ)[*sizeI - 2] == 2){
         for(i = 0; i < *sizeZ; i++){
             *(**(A + *sizeI - 2)+i) = nvSolution[i];
         }
-        
-            cout << "\nBmm:" << (*(*sizeJ + *sizeI - 2)) ;
-        //(*(*sizeJ + *sizeI - 2))++;
-            cout << "\nBBmm:" << (*sizeJ)[*sizeI - 2] ;
         return;
     }
     //Creation d'une nv B1[][] plus large pour la nv solution(nvSolution)
@@ -160,7 +149,6 @@ int* orderSolution(int* s, int N){
     int change;
     for(int i = 0; i < N; i++){
         refs[i] = i;
-        cout << s[i] << endl;
     }
     for(int i = 0; i < N - 1; i++){
         for(int j = i + 1; j < N; j++){

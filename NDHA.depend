@@ -9,19 +9,20 @@
 
 1623317200 c:\m1\stage\ndha\include\swap.h
 
-1623662449 source:c:\m1\stage\ndha\src\onemove.cpp
+1623680453 source:c:\m1\stage\ndha\src\onemove.cpp
 	<OneMove.h>
 	<ManageBlock.h>
 	<stdlib.h>
 	<iostream>
 
-1623628771 c:\m1\stage\ndha\include\onemove.h
+1623678437 c:\m1\stage\ndha\include\onemove.h
 
-1623654533 source:c:\m1\stage\ndha\main.cpp
+1623685585 source:c:\m1\stage\ndha\main.cpp
 	<iostream>
 	<ManageBlock.h>
 	<stdio.h>
 	<OneMove.h>
+	<ManageMatrix.h>
 
 1623654214 c:\m1\stage\ndha\include\manageblock.h
 
@@ -32,9 +33,16 @@
 
 1623265385 c:\m1\stage\ndha\include\f1.h
 
-1623659708 source:c:\m1\stage\ndha\src\manageblock.cpp
+1623672875 source:c:\m1\stage\ndha\src\manageblock.cpp
 	<ManageBlock.h>
 	<stdio.h>
 	<stdlib.h>
 	<iostream>
+
+1623685611 c:\m1\stage\ndha\include\managematrix.h
+
+1623685642 source:c:\m1\stage\ndha\src\managematrix.cpp
+	<iostream>
+	<ManageMatrix.h>
+	<stdlib.h>
 
