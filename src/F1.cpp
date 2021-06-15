@@ -4,10 +4,13 @@
 
 F1::F1()
 {
-
+    
 }
 
-float F1::f(int N,int m,float** D,int** X){
+float F1::f(int N,int m,float** D,int** X, int* L, int* U){
+    if(!subjectToOnlyOneVariable(N, m, X) || !subjectToBounds(N, m, X, L, U)){
+        return -1;
+    }
     float sum = 0;
     for(int g = 0; g < m; g++){
         for(int i = 0; i < N-1; i++){
@@ -45,19 +48,22 @@ bool F1::subjectToBounds(int N, int m, int** X, int* L, int* U){
     }
     return true;
 }
-solutionInistial(int N, int m, float *s, int* L, int* U, int** X){
+
+int* F1::solutionInistial(int N, int m, int* L, int* U){
+
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution<> dis(0, N);
-    int I, r;
-    for(int i = 0; i < m; i++){
-        I = L[i];
-        for(int k = 0; k < I; k++){
+    int r,i,j, *s = (int*) malloc(sizeof(int) * N);
+    for(i = 0; i < N; i++){
+        s[i] = -1;
+    }
+    for(i = 0; i < m; i++){
+        for(j = 0; j < L[i]; j++){
             r = (int) (dis(gen));
             effectiveRandom :
                 if(s[r] == -1){
-                    s[r] = I;
-                    X[r][i] = 1;
+                    s[r] = L[i];
                 }else {
                     r++;
                     r = r% N;
@@ -69,7 +75,7 @@ solutionInistial(int N, int m, float *s, int* L, int* U, int** X){
     int n = 0, cmpM = 0, cmpMaxM = 0;
     r = 0;
     int maxM[m];
-    for(int i = 0; i < m; i++){
+    for(i = 0; i < m; i++){
             maxM[i] = U[i] - L[i];
     }
     for(int i = 0; i < N; i++){
@@ -88,7 +94,6 @@ solutionInistial(int N, int m, float *s, int* L, int* U, int** X){
             effectiveRandomTwo :
             if(n < N && s[r] == -1){
                 s[i] = cmpM;
-                X[i][cmpM] = 1;
                 maxM[cmpM] -= 1;
                 n = 0;
                 continue;
@@ -101,6 +106,7 @@ solutionInistial(int N, int m, float *s, int* L, int* U, int** X){
                 break;
             }
     }
+    return s;
 }
 
 F1::~F1()

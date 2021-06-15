@@ -172,6 +172,7 @@ int* copyArray(int* s, int N){
     }
     return res;
 }
+
 int* oldOrder(int* s, int* refs, int N){
     int change;
     int* refss = copyArray(refs, N);

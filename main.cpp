@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<OneMove.h>
 #include<ManageMatrix.h>
+#include "F1.h"
 using namespace std;
 
 int main()
@@ -10,13 +11,14 @@ int main()
     int N = 7;
     int m = 3;
     int sizeI = 1, *sizeJ = NULL, sizeZ = N;
-    int*** B, **BijIndex = nullptr;
+    int L[3] = {2, 1, 1};
+    int U[3] = {4, 3, 3};
+    /*int*** B, **BijIndex = nullptr;
     int s[N] = {0,1,2,0,1,2,0};
     int e[N] = {0,1,2,3,4,5,6};
 
     int s3[N] = {5,1,2,0,1,2,0};
-    int L[3] = {2, 1, 1};
-    int U[3] = {4, 3, 3};
+
     B = OneMove(N, m, B, s, L, U, &BijIndex);
     int** D = D_Matrix(N, e);
     displayMatrix(D, N, N);
@@ -26,9 +28,12 @@ int main()
     displayMatrix(M1, m, m);
     displayMatrix(Xmatrice, N, m);
 
-    displayMatrix(BijIndex, m * (m - 1), 2);
-    
-    
-    cout << "hgelo";
+    displayMatrix(BijIndex, m * (m - 1), 2);*/
+
+    F1 *fObj = new F1;
+    int * solutionInitial = fObj->solutionInistial(N, m, L, U);
+    for(int i = 0; i < N; i++){
+        cout << solutionInitial[i] << " ";
+    }
     return 0;
 }

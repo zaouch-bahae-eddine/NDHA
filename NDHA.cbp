@@ -36,6 +36,7 @@
 		</Compiler>
 		<Unit filename="include/F1.h" />
 		<Unit filename="include/ManageBlock.h" />
+		<Unit filename="include/ManageMatrix.h" />
 		<Unit filename="include/ObjectiveFunction.h" />
 		<Unit filename="include/OneMove.h">
 			<Option target="&lt;{~None~}&gt;" />
@@ -45,9 +46,8 @@
 		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="src/F1.cpp" />
-		<Unit filename="src/ManageBlock.cpp">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="src/ManageBlock.cpp" />
+		<Unit filename="src/ManageMatrix.cpp" />
 		<Unit filename="src/ObjectiveFunction.cpp" />
 		<Unit filename="src/OneMove.cpp" />
 		<Unit filename="src/Swap.cpp" />

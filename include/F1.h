@@ -6,9 +6,10 @@ class F1
 {
     public:
         F1();
-        float f(int N,int m,float** D,int** X);
+        float f(int N,int m,float** D,int** X, int* L, int* U);
         bool subjectToOnlyOneVariable(int N, int m, int** X);
         bool subjectToBounds(int N, int m, int** X, int* L, int* U);
+        int* solutionInistial(int N, int m, int* L, int* U);
         virtual ~F1();
 
     protected:
