@@ -1,17 +1,21 @@
 #include "F1.h"
 #include <random>
 #include <cstdlib>   // rand and srand
+#include <iostream>
+using namespace std;
+
+
 
 F1::F1()
 {
-    
+
 }
 
-float F1::f(int N,int m,float** D,int** X, int* L, int* U){
+double F1::f(int N, int m, float** D, int** X, int* L, int* U){
     if(!subjectToOnlyOneVariable(N, m, X) || !subjectToBounds(N, m, X, L, U)){
         return -1;
     }
-    float sum = 0;
+    double sum = 0;
     for(int g = 0; g < m; g++){
         for(int i = 0; i < N-1; i++){
             for(int j = i + 1; j < N; j++){
@@ -50,65 +54,53 @@ bool F1::subjectToBounds(int N, int m, int** X, int* L, int* U){
 }
 
 int* F1::solutionInistial(int N, int m, int* L, int* U){
-
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> dis(0, N);
-    int r,i,j, *s = (int*) malloc(sizeof(int) * N);
+        std::uniform_int_distribution<int> dis(0, 10);
+        std::uniform_int_distribution<int> randGroup(0, 3);
+    int r,i,j,k, *s = (int*) malloc(sizeof(int) * N), G[N];
     for(i = 0; i < N; i++){
         s[i] = -1;
     }
     for(i = 0; i < m; i++){
         for(j = 0; j < L[i]; j++){
+            
             r = (int) (dis(gen));
             effectiveRandom :
                 if(s[r] == -1){
-                    s[r] = L[i];
+                    s[r] = i;
                 }else {
-                    r++;
-                    r = r% N;
+                    r += (int) (dis(gen));
+                    r = (r + 1)% N;
                     goto effectiveRandom;
                 }
         }
     }
-    //remplire s avec le reste des element en respectant le U
-    int n = 0, cmpM = 0, cmpMaxM = 0;
-    r = 0;
-    int maxM[m];
     for(i = 0; i < m; i++){
-            maxM[i] = U[i] - L[i];
+        G[i] = 0;
     }
-    for(int i = 0; i < N; i++){
-            otherGroup :
-            if(cmpMaxM < m || maxM[cmpM] > 0){
-                cmpM++;
-                cmpM %= m;
-                cmpMaxM ++;
-                if(maxM[cmpM] == 0){
-                    goto otherGroup;
-                }
-            } else {
-                break;
+    for(i = 0; i < m; i++){
+        for(j = 0; j < N; j++){
+            if(s[j] == i){
+                G[i] ++;
             }
+        }
+    }
+    k = (int) (randGroup(gen));
+    for(i = 0; i < N; i++){
 
-            effectiveRandomTwo :
-            if(n < N && s[r] == -1){
-                s[i] = cmpM;
-                maxM[cmpM] -= 1;
-                n = 0;
-                continue;
-            } else if(n < N){
-                r++;
-                r %= N;
-                n++;
-                goto effectiveRandomTwo;
-            }else {
-                break;
+        if(s[i] == -1){
+            while(s[i] == -1){
+                if(G[k] < U[k]){
+                    s[i] = k;
+                    G[k]++;
+                }
+                k += (int) (randGroup(gen));
+                k = k % m;
             }
+        }
     }
+   
     return s;
 }
-
 F1::~F1()
 {
     //dtor

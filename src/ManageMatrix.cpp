@@ -14,11 +14,11 @@ void displayMatrix(int** D, int row, int col){
     }
 }
 
-int** D_Matrix(int N, int* elements){
+float** D_Matrix(int N, int* elements){
     int i, j;
-    int** D = (int**) malloc(sizeof(int*) * N);
+    float** D = (float**) malloc(sizeof(float*) * N);
     for(i = 0; i < N; i++){
-        D[i] = (int*) malloc(sizeof(int) * N);
+        D[i] = (float*) malloc(sizeof(int) * N);
     }
     for(i = 0; i < N; i++){
         for(j = 0; j < N; j++){
@@ -44,6 +44,17 @@ int** X_Matrix(int N, int m, int* solution){
         }
     }
     return X;
+}
+int* S_Matrix(int** X, int N, int m){
+    int i, j, *s = (int*) malloc(sizeof(int) * N);
+    for(i = 0; i < m; i++){
+        for(j = 0; j < N; j++){
+            if(X[j][i] == 1){
+                s[j] = i;
+            }
+        }
+    }
+    return s;
 }
 int** M_MatrixIntact(int m){
     int i, j;

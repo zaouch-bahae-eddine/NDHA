@@ -17,32 +17,36 @@
 
 1623678437 c:\m1\stage\ndha\include\onemove.h
 
-1623744631 source:c:\m1\stage\ndha\main.cpp
+1624660028 source:c:\m1\stage\ndha\main.cpp
 	<iostream>
 	<ManageBlock.h>
 	<stdio.h>
 	<OneMove.h>
 	<ManageMatrix.h>
 	"F1.h"
+	<GWOApplication.h>
 
 1623654214 c:\m1\stage\ndha\include\manageblock.h
 
-1623744541 source:c:\m1\stage\ndha\src\f1.cpp
+1624491585 source:c:\m1\stage\ndha\src\f1.cpp
 	"F1.h"
 	<random>
 	<cstdlib>
+	<iostream>
 
-1623744204 c:\m1\stage\ndha\include\f1.h
+1624491258 c:\m1\stage\ndha\include\f1.h
+	<random>
+	<cstdlib>
 
-1623672875 source:c:\m1\stage\ndha\src\manageblock.cpp
+1623744778 source:c:\m1\stage\ndha\src\manageblock.cpp
 	<ManageBlock.h>
 	<stdio.h>
 	<stdlib.h>
 	<iostream>
 
-1623685611 c:\m1\stage\ndha\include\managematrix.h
+1624047220 c:\m1\stage\ndha\include\managematrix.h
 
-1623685642 source:c:\m1\stage\ndha\src\managematrix.cpp
+1624047154 source:c:\m1\stage\ndha\src\managematrix.cpp
 	<iostream>
 	<ManageMatrix.h>
 	<stdlib.h>
@@ -51,4 +55,18 @@
 	"NDHA.h"
 
 1623313660 c:\m1\stage\ndha\include\ndha.h
+
+1624654503 c:\m1\stage\ndha\include\gwoapplication.h
+
+1624658934 source:c:\m1\stage\ndha\src\gwoapplication.cpp
+	<iostream>
+	<random>
+	<limits>
+	<cstdlib>
+	<cstdlib>
+	<fstream>
+	<F1.h>
+	<GWOApplication.h>
+	<ManageMatrix.h>
+	<math.h>
 
